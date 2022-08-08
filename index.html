@@ -13,45 +13,20 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        .button {
-          display: inline-block;
-          border-radius: 4px;
-          background-color: #27AE60;
-          border: none;
-          color: #FFFFFF;
-          text-align: center;
-          font-size: 18px;
-          padding: 4px;
-          width: 130px;
-          transition: all 0.5s;
-          cursor: pointer;
-          margin: 0.2px;
-        }
-        
-        .button span {
-          cursor: pointer;
-          display: inline-block;
-          position: relative;
-          transition: 0.5s;
-        }
-        
-        .button span:after {
-          content: '\00bb';
-          position: absolute;
-          opacity: 0;
-          top: 0;
-          right: -20px;
-          transition: 0.5s;
-        }
-        
-        .button:hover span {
-          padding-right: 25px;
-        }
-        
-        .button:hover span:after {
-          opacity: 1;
-          right: 0;
-        }
+        input[type=submit] {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #27AE60;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 18px;
+            padding: 4px;
+            width: 130px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 0.2px;
+          }
         </style>
 </head>
 <body class="main-content">
@@ -455,17 +430,19 @@
                     </div>
                     <div class="right-contact">
                         <h4>Écrivez-moi</h4>
-                        <form action="https://formsubmit.co/b435fa0d30135dd6097dfe2bacc6b193"class="contact-form" method="POST">
+                        <form  class="contact-form" id="form">
                             <div class="input-control i-c-2">
-                                <input type="text" required placeholder="Votre nom...">
-                                <input type="email" required placeholder="Votre mail...">
+                                <input type="text" required placeholder="Votre nom..." id="from_name">
+                                <input type="email" required placeholder="Votre mail..." id="email_id">
+                               
                             </div>
+                            
                             <div class="input-control">
-                                <textarea name="" id="" cols="15" rows="8"  required placeholder="Votre message ..."></textarea>
+                                <textarea name="message" id="message" cols="15" rows="8"  required placeholder="Votre message ..."></textarea>
                                 
                             </div>
-                            <input type="hidden" name="_next" value="https://mbaillo.github.io/github.test/">
-                            <button class="button"type="submit" style="vertical-align:middle"><span>Envoyer</span></button>
+                            <input type="submit" id="button" value="Envoyer"  >
+                           
                            
                         </form>
                     </div>
@@ -496,18 +473,42 @@
     <div class="theme-btn">
         <i class="fas fa-adjust"></i>
     </div>
-    
-    
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-
         var styped= new Typed(".auto-type",{
-            strings: ["un Développeur","ouvert d'esprit","un Créatif"," un Etudiant", ],
+            strings: ["Développeur","ouvert d'esprit","Créatif"," Etudiant", ],
             typeSpeed:160,
             loop: true
         })
-
     </script>
+    <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('uUdOMky8mAaHteTfV')
+</script>
+<script>
+    const btn = document.getElementById('button');
+
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'En cours...';
+
+   const serviceID = 'service_mofdqlw';
+   const templateID = 'template_a3ec8si';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Envoyé!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+</script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
 </body>
